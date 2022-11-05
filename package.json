@@ -15,10 +15,12 @@
     "@mantine/core": "^5.5.4",
     "@mantine/hooks": "^5.5.4",
     "@mantine/next": "^5.5.4",
+    "@nextui-org/react": "^1.0.0-beta.10",
     "next": "latest",
     "next-pwa": "5.5.4",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "sass": "^1.56.0"
   },
   "devDependencies": {
     "@types/node": "17.0.4",
