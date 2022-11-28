@@ -20,6 +20,7 @@ const MyNavbar = () => {
         <Navbar.Item>
           <Input
             width='400px'
+            aria-label='search-icon-button'
             contentLeft={<Image src={SearchIcon} alt='search-icon' width={20} height={20} />}
             placeholder='Search you anime ...'
           />
@@ -27,7 +28,12 @@ const MyNavbar = () => {
       </Navbar.Content>
       <Navbar.Content>
         <Navbar.Item>
-          <Button auto color='success' icon={<Image src={UserIcon} alt='user-icon' width={20} height={20} />} />
+          <Button
+            auto
+            color='success'
+            aria-label='user-icon-button'
+            icon={<Image src={UserIcon} alt='user-icon' width={20} height={20} />}
+          />
         </Navbar.Item>
       </Navbar.Content>
     </Navbar>
