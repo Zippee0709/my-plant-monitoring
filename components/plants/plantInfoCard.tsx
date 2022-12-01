@@ -1,7 +1,7 @@
 import { Col, Container, Spacer, Text } from '@nextui-org/react';
 import { PlantType } from '../../types/plants.types';
 
-const PlantInfoCard = ({ pic, name, age }: PlantType) => {
+const PlantInfoCard = ({ pic, name, age, isSelected }: PlantType) => {
   return (
     <Container
       display='flex'
@@ -14,6 +14,7 @@ const PlantInfoCard = ({ pic, name, age }: PlantType) => {
         borderRadius: '5px',
         padding: '5px',
         cursor: 'pointer',
+        backgroundColor: isSelected ? '#e0ffc0' : '#ffffff',
       }}
     >
       <img src={pic} width={70} height={70} />

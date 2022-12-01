@@ -6,4 +6,5 @@ export type PlantType = {
   name: string;
   pic: string;
   age: string;
+  isSelected: boolean;
 };

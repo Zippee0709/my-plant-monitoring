@@ -3,7 +3,7 @@ import { Card, Container, Link, Spacer, Text, Image, Row, Col } from '@nextui-or
 
 import PlantIcon from '../icons/PlantIcon';
 import { PlantType } from '../../types/plants.types';
-import PlantInfoCard from '../plants/plantinfoCard';
+import PlantInfoCard from '../plants/plantInfoCard';
 
 interface Props {
   recentPlants: PlantType[];
@@ -15,14 +15,15 @@ const SidePanel = ({ recentPlants, allPlants }: Props) => {
     <div>
       <Container
         css={{
-          background: '#f4f6ec',
+          backgroundColor: '$ffffff',
+          borderRight: '1px solid #e1e1e1',
           maxWidth: '300px',
           height: '100vh',
           padding: '0',
           margin: '0',
         }}
       >
-        <Link href='/dashboard' css={{ paddingTop: '10px', paddingBottom: '10px' }}>
+        {/* <Link href='/dashboard' css={{ paddingTop: '10px', paddingBottom: '10px' }}>
           <Container display='flex' direction='row' alignItems='center' gap={2}>
             <PlantIcon color='#224722' width={40} height={40} />
             <Spacer x={1} />
@@ -31,14 +32,21 @@ const SidePanel = ({ recentPlants, allPlants }: Props) => {
             </Text>
           </Container>
         </Link>
-        <hr />
+        <hr /> */}
         <Container gap={2} css={{ paddingTop: '10px' }}>
           <Text h4 color='#224722'>
             Recent
           </Text>
           {recentPlants.map((plant, index) => (
             <Col>
-              <PlantInfoCard key={plant.id} id={plant.id} pic={plant.pic} name={plant.name} age={plant.age} />
+              <PlantInfoCard
+                key={plant.id}
+                id={plant.id}
+                pic={plant.pic}
+                name={plant.name}
+                age={plant.age}
+                isSelected={plant.isSelected}
+              />
               {index !== recentPlants.length && <Spacer y={0.3} />}
             </Col>
           ))}
@@ -49,7 +57,14 @@ const SidePanel = ({ recentPlants, allPlants }: Props) => {
           </Text>
           {allPlants.map((plant, index) => (
             <Col>
-              <PlantInfoCard key={plant.id} id={plant.id} pic={plant.pic} name={plant.name} age={plant.age} />
+              <PlantInfoCard
+                key={plant.id}
+                id={plant.id}
+                pic={plant.pic}
+                name={plant.name}
+                age={plant.age}
+                isSelected={plant.isSelected}
+              />
               {index !== recentPlants.length && <Spacer y={0.3} />}
             </Col>
           ))}
