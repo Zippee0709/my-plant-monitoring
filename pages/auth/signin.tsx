@@ -58,7 +58,9 @@ const SignIn = () => {
             </Text>
           </Row>
           <Spacer y={1} />
-          <Button onPress={handleSubmit}>Sign In</Button>
+          <Button color='success' onPress={handleSubmit}>
+            Sign In
+          </Button>
           <Spacer y={1} />
           <Row justify='center'>
             <Text size={14}>Don&apos;t have an account yet ?</Text>

@@ -37,8 +37,8 @@ const Home = () => {
               Smart care reminders
             </Text>
             <Text size='$xl' color='#224722'>
-              Are you not sure when it’s time to water your plants? Planta knows when! Just add them to the app and get
-              notified when it’s time to water, fertilize, mist, clean (yes, it’s a thing) and repot!
+              Are you not sure when it's time to water your plants? Planta knows when! Just add them to the app and get
+              notified when it's time to water, fertilize, mist, clean (yes, it's a thing) and repot!
             </Text>
             <Button color='success' size='xl' rounded>
               Download Now
@@ -109,7 +109,7 @@ const Home = () => {
               Dr. Plant
             </Text>
             <Text size='$xl' color='#224722'>
-              Are your plants not feeling good? Dr. Planta can help you figure out what’s wrong and set up a treatment
+              Are your plants not feeling good? Dr. Planta can help you figure out what's wrong and set up a treatment
               plan.
             </Text>
             <Button color='success' size='xl' rounded>

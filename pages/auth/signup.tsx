@@ -93,7 +93,9 @@ const SignUp = () => {
             />
           )}
           <Spacer y={1} />
-          <Button onPress={handleSubmit}>{showStepTwo ? 'Sign Up' : 'Next'}</Button>
+          <Button color='success' onPress={handleSubmit}>
+            {showStepTwo ? 'Sign Up' : 'Next'}
+          </Button>
           <Spacer y={1} />
           <Row justify='center'>
             <Text size={14}>Already have an account ?</Text>
