@@ -1,5 +1,45 @@
 @import '../variables.scss';
-
 .dashboard {
-  background-color: $chinese-white;
+  &__main {
+    display: flex;
+    flex-grow: 1;
+    min-height: calc(100vh - 76px);
+    padding: 2.5rem 1.75rem;
+    background-color: $ghost-white;
+    gap: 2rem;
+
+    &__recent {
+      display: flex;
+      flex-direction: column;
+      width: 832px;
+      flex-grow: 1;
+      background-color: #ffffff;
+      border-radius: 8px;
+    }
+
+    &__information {
+      display: flex;
+      flex-direction: column;
+      width: 400px;
+      background-color: $ghost-white;
+      gap: 2rem;
+
+      &__task {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        background-color: #ffffff;
+        border-radius: 8px;
+      }
+
+      &__weather {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        flex-grow: 1;
+        background-color: #ffffff;
+        border-radius: 8px;
+      }
+    }
+  }
 }

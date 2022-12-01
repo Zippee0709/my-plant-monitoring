@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  gap: 1rem;
+}
+
+.login {
+  font-size: 16px;
+  font-weight: bold;
+  color: $pomona-green;
+}
+
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  height: 40px;
+  width: 100px;
+  background-color: $pomona-green;
+
+  font-size: 16px;
+  font-weight: bold;
+  color: $chinese-white;
+}

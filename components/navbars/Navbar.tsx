@@ -1,32 +1,28 @@
 import React from 'react';
 import Link from 'next/link';
-import { Navbar, Button, Text } from '@nextui-org/react';
+import { Navbar, Text } from '@nextui-org/react';
 
 import PlantIcon from '../icons/PlantIcon';
-import UserIcon from '../icons/UserIcon';
+import styles from './Navbar.module.scss';
 
 const MyNavbar = () => {
   return (
     <Navbar variant='static' disableShadow css={{ backgroundColor: '#e7edde', $$navbarBlurBackgroundColor: '#e7edde' }}>
       <Navbar.Brand>
-        <PlantIcon color='#224722' width={40} height={40} />
-      </Navbar.Brand>
-      <Navbar.Content>
-        <Link href='/'>
+        <Link href='/' className={styles['brand-link']}>
+          <PlantIcon color='#224722' width={40} height={40} />
           <Text b size='$2xl' color='#224722'>
             MyPlant
           </Text>
         </Link>
-      </Navbar.Content>
+      </Navbar.Brand>
       <Navbar.Content>
-        <Navbar.Item>
-          <Button
-            auto
-            aria-label='user-icon-button'
-            icon={<UserIcon color='#224722' />}
-            css={{ backgroundColor: 'transparent' }}
-          />
-        </Navbar.Item>
+        <Link id='signin' href='/auth/signin' className={styles.login}>
+          Login
+        </Link>
+        <Link href='/auth/signup' className={styles.register}>
+          Register
+        </Link>
       </Navbar.Content>
     </Navbar>
   );

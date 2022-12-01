@@ -1,12 +1,11 @@
 {
-  "theme_color": "#f69435",
-  "background_color": "#f69435",
+  "theme_color": "#224722",
+  "background_color": "#e7edde",
   "display": "browser",
   "scope": "/",
   "start_url": "/",
-  "name": "web-anime",
-  "short_name": "web-anime",
-  "description": "Web anime reader",
+  "name": "my-plant-monitoring",
+  "short_name": "MPM",
   "icons": [
     {
       "src": "/icon-192x192.png",
