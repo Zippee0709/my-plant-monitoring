@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, Button } from '@nextui-org/react';
+import { Container, Image, Text, Button } from '@nextui-org/react';
 
 import MyNavbar from '../components/navbars/Navbar';
 import MyFooter from '../components/footers/Footer';
@@ -7,7 +7,7 @@ import styles from '../styles/pages/Home.module.scss';
 
 const Home = () => {
   return (
-    <div className={styles.home}>
+    <Container display='flex' direction='column' css={{ minHeight: '100vh', width: '100%', padding: 0 }}>
       <MyNavbar />
       <main className={styles.home__main}>
         <section className={styles.home__main__introduction}>
@@ -129,7 +129,7 @@ const Home = () => {
         </section>
       </main>
       <MyFooter />
-    </div>
+    </Container>
   );
 };
 

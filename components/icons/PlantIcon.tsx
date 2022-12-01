@@ -6,7 +6,7 @@ interface IPlantIconProps {
   height?: number;
 }
 
-const PlantIcon = ({ color = '#000000', width = 20, height = 20 }: IPlantIconProps) => {
+const PlantIcon = ({ color = '#000000', width = 24, height = 24 }: IPlantIconProps) => {
   return (
     <svg
       width={width}
@@ -27,4 +27,4 @@ const PlantIcon = ({ color = '#000000', width = 20, height = 20 }: IPlantIconPro
   );
 };
 
-export default PlantIcon;
+export default React.memo(PlantIcon);

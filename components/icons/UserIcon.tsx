@@ -6,7 +6,7 @@ interface IUserIconProps {
   height?: number;
 }
 
-const UserIcon = ({ color = '#000000', width = 20, height = 20 }: IUserIconProps) => {
+const UserIcon = ({ color = '#000000', width = 24, height = 24 }: IUserIconProps) => {
   return (
     <svg width={width} height={height} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 490.1 490.1' xmlSpace='preserve'>
       <path
@@ -17,4 +17,4 @@ const UserIcon = ({ color = '#000000', width = 20, height = 20 }: IUserIconProps
   );
 };
 
-export default UserIcon;
+export default React.memo(UserIcon);
