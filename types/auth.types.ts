@@ -8,3 +8,17 @@ export type AuthInputType = {
   password?: string;
   confirmPassword?: string;
 };
+
+//
+// Auth Login rep types
+// ===== ===== ===== ===== =====
+export type AuthLoginRepType = {
+  message: string;
+};
+
+//
+// Auth Register rep types
+// ===== ===== ===== ===== =====
+export type AuthRegisterRepType = {
+  message: boolean;
+};

@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Card, Checkbox, Container, FormElement, Input, Link, Row, Spacer, Text } from '@nextui-org/react';
-import { AuthInputType } from '../../types/auth.types';
+import { AuthInputType, AuthLoginRepType } from '../../types/auth.types';
+import AuthContext from '../../contexts/auth.context';
+import { RequestFailedResponseType } from '../../types/clientApi.types';
+import { toast } from 'react-toastify';
+import Cookies from 'universal-cookie';
+import { useRouter } from 'next/router';
 
 const SignIn = () => {
+  const cookies = new Cookies();
   const [input, setInput] = useState<Pick<AuthInputType, 'email' | 'password'>>();
+  const authContext = useContext(AuthContext);
+  const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<FormElement>) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
-    console.log('submit');
+  const handleSubmit = async () => {
+    if (!input || !authContext) return;
+    const rep = await authContext.Login(input);
+    if ((rep as RequestFailedResponseType).error) {
+      // TODO : repair this -> need to add <ToastContainer /> in _app.tsx,
+      // TODO : but it's broken when the toast appear
+      // toast.error('Error - login', {
+      //   position: 'top-right',
+      //   autoClose: 2500,
+      // });
+      return;
+    }
+    cookies.set('token', (rep as AuthLoginRepType).message);
+    router.push('/dashboard');
   };
 
   return (
