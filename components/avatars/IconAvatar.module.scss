@@ -1,0 +1,20 @@
+.icon-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 16px;
+
+  &--water {
+    background-color: #edf7ff;
+  }
+
+  &--light {
+    background-color: #eef8ea;
+  }
+
+  &--temperature {
+    background-color: #f8eaeb;
+  }
+}

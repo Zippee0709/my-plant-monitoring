@@ -28,18 +28,33 @@
       &__task {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
+        height: 380px;
         background-color: #ffffff;
         border-radius: 8px;
+
+        &__container {
+          display: flex;
+          flex-direction: column;
+          flex-grow: 1;
+          gap: 0.5rem;
+          padding: 0.5rem 0;
+        }
       }
 
       &__weather {
         display: flex;
         flex-direction: column;
-        width: 400px;
         flex-grow: 1;
         background-color: #ffffff;
         border-radius: 8px;
+      }
+
+      &__link {
+        font-size: 16px;
+        font-weight: bold;
+        color: $camouflage-green;
+        margin-top: auto;
+        text-align: center;
       }
     }
   }

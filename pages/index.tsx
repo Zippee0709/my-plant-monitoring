@@ -7,7 +7,7 @@ import styles from '../styles/pages/Home.module.scss';
 
 const Home = () => {
   return (
-    <Container display='flex' direction='column' css={{ minHeight: '100vh', width: '100%', padding: 0 }}>
+    <Container display='flex' direction='column' fluid css={{ minHeight: '100vh', minWidth: '100%', p: 0, m: 0 }}>
       <MyNavbar />
       <main className={styles.home__main}>
         <section className={styles.home__main__introduction}>
