@@ -10,7 +10,7 @@ import SunnyIcon from '../../assets/weather-icons/sunny.svg';
 
 const WeatherCard = () => {
   return (
-    <Card css={{ mt: '$xs', height: '370px', background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364);' }}>
+    <Card css={{ mt: '$xs', height: '344px', background: 'linear-gradient(to right, #0f2027, #203a43, #2c5364);' }}>
       <Card.Header css={{ justifyContent: 'space-between' }}>
         <Text b color='white' size='$xl'>
           Monday
@@ -19,24 +19,23 @@ const WeatherCard = () => {
           11:09 - 10/02
         </Text>
       </Card.Header>
-      <Card.Divider />
-      <Card.Body css={{ py: '$10' }}>
-        <Row>
+      <Card.Body>
+        <Row align='center'>
           <Col>
-            <Text b color='white' size='$5xl'>
+            <Text b color='white' size='$4xl'>
               22°C
             </Text>
             <Row>
-              <Text b color='gray'>
+              <Text b size='$sm' color='gray'>
                 Real feel
               </Text>
               &nbsp;
-              <Text b color='white'>
-                22°C
+              <Text b size='$sm' color='white'>
+                18°C
               </Text>
             </Row>
           </Col>
-          <Image src={SunnyIcon} alt='Sunny' width={110} height={110} />
+          <Image src={SunnyIcon} alt='Sunny' width={80} height={80} />
         </Row>
       </Card.Body>
       <Card.Footer>

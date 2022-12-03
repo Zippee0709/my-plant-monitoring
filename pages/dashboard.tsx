@@ -78,12 +78,10 @@ const Dashboard = () => {
               </Container>
             </div>
             <div className={styles.dashboard__main__information__weather}>
-              <Container fluid display='flex' css={{ p: '$sm' }}>
-                <Text b size='$2xl' color='#224722'>
-                  Weather
-                </Text>
-                <WeatherCard />
-              </Container>
+              <Text b size='$2xl' color='#224722'>
+                Weather
+              </Text>
+              <WeatherCard />
             </div>
           </div>
         </main>
