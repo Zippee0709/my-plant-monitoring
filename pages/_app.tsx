@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { NextUIProvider } from '@nextui-org/react';
 import '../styles/globals.scss';
+import AuthProvider from '../providers/auth.provider';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -36,7 +37,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel='apple-touch-icon' sizes='180x180' href='/icons/apple-icon-180x180.png' />
       </Head>
       <NextUIProvider>
-        <Component {...pageProps} />
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
       </NextUIProvider>
     </>
   );

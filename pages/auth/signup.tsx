@@ -1,20 +1,52 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Card, Container, FormElement, Input, Link, Row, Spacer, Text } from '@nextui-org/react';
 import { AuthInputType } from '../../types/auth.types';
+import AuthContext from '../../contexts/auth.context';
+import { toast } from 'react-toastify';
+import { RequestFailedResponseType } from '../../types/clientApi.types';
+import { useRouter } from 'next/router';
 
 const SignUp = () => {
   const [showStepTwo, setShowStepTwo] = React.useState(false);
   const [input, setInput] = useState<AuthInputType>({});
+  const authContext = useContext(AuthContext);
+  const router = useRouter();
+
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  const [confirmPasswordHasError, setConfirmPasswordHasError] = useState(false);
+  const [emailIsInvalid, setEmailIsInvalid] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<FormElement>) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!showStepTwo) {
       setShowStepTwo(true);
     } else {
-      //TODO(): submit form
+      setEmailIsInvalid(!emailRegex.test(input.email ?? ''));
+      setConfirmPasswordHasError(input.password !== input.confirmPassword);
+
+      if (confirmPasswordHasError || emailIsInvalid || !authContext) {
+        return;
+      }
+      const rep = await authContext.Register(input);
+      if ((rep as RequestFailedResponseType).error) {
+        // TODO : error like signin
+        // toast.error('Error - register'), {
+        //   position: 'top-right',
+        //   autoClose: 2500,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: false,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'dark',
+        // };
+        return;
+      }
+      // TODO : add a toast when success
+      router.push('/auth/signin');
     }
   };
 
