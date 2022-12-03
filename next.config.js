@@ -10,6 +10,9 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ['https://fluffy-crepe-79ebcb.netlify.app'],
+  },
   compiler: {
     removeConsole: process.env.NEXT_PUBLIC_ENV !== 'development',
   },
