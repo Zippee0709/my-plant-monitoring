@@ -10,7 +10,6 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   compiler: {
     removeConsole: process.env.NEXT_PUBLIC_ENV !== 'development',
   },
