@@ -1,7 +1,7 @@
 {
   "theme_color": "#224722",
   "background_color": "#e7edde",
-  "display": "browser",
+  "display": "fullscreen",
   "scope": "/",
   "start_url": "/",
   "name": "my-plant-monitoring",
