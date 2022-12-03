@@ -1,10 +1,19 @@
-import { Button, Container, Grid, Input, Row, Spacer, Text } from '@nextui-org/react';
+import { Button, Container, FormElement, Grid, Input, Row, Spacer, Text } from '@nextui-org/react';
+import { useContext, useState } from 'react';
 import PlantPreviewCard from '../../components/cards/PlantPreviewCard';
 import AddIcon from '../../components/icons/AddIcon';
 import UserNavbar from '../../components/navbars/UserNavbar';
 import Sidebar, { SidebarItems } from '../../components/sidebars/Sidebar';
+import PlantContext from '../../contexts/plant.context';
 
 const Plants = () => {
+  const planContext = useContext(PlantContext);
+  const [search, setSearch] = useState('');
+
+  const handleSearch = (e: React.ChangeEvent<FormElement>) => {
+    setSearch(e.target.value);
+  };
+
   return (
     <Container display='flex' direction='column' fluid css={{ minHeight: '100vh', padding: 0 }}>
       <UserNavbar />
@@ -24,7 +33,14 @@ const Plants = () => {
               All my plants
             </Text>
             <Container display='flex' justify='flex-end' gap={0}>
-              <Input clearable bordered color='success' placeholder='Search' />
+              <Input
+                clearable
+                bordered
+                aria-label='Search'
+                color='success'
+                placeholder='Search'
+                onChange={handleSearch}
+              />
               <Spacer x={0.5} />
               <Button auto icon={<AddIcon color='#FFFFFF' width={16} height={16} />} color='success'>
                 Add a plant
@@ -32,24 +48,13 @@ const Plants = () => {
             </Container>
           </Container>
           <Grid.Container gap={2} justify='flex-start'>
-            <Grid xs={6} sm={3}>
-              <PlantPreviewCard />
-            </Grid>
-            <Grid xs={6} sm={3}>
-              <PlantPreviewCard />
-            </Grid>
-            <Grid xs={6} sm={3}>
-              <PlantPreviewCard />
-            </Grid>
-            <Grid xs={6} sm={3}>
-              <PlantPreviewCard />
-            </Grid>
-            <Grid xs={6} sm={3}>
-              <PlantPreviewCard />
-            </Grid>
-            <Grid xs={6} sm={3}>
-              <PlantPreviewCard />
-            </Grid>
+            {planContext?.plants.map((plant) =>
+              search != '' && !plant.name.toLowerCase().includes(search.toLowerCase()) ? null : (
+                <Grid xs={6} sm={3} key={plant.id}>
+                  <PlantPreviewCard name={plant.name} isEnable={plant.isEnable} />
+                </Grid>
+              )
+            )}
           </Grid.Container>
         </Container>
       </Row>

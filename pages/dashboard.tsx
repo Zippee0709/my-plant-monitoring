@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import { Container, Row, Grid, Text, Button } from '@nextui-org/react';
 
@@ -14,6 +14,7 @@ import { NotificationIconEnum } from '../enums/NotificationIconEnum';
 import { PlantStatusEnum } from '../enums/PlantStatusEnum';
 
 import styles from '../styles/pages/Dashboard.module.scss';
+import PlantContext from '../contexts/plant.context';
 
 const requestNotificationPermission = async () => {
   const permission = await window.Notification.requestPermission();
@@ -24,6 +25,8 @@ const requestNotificationPermission = async () => {
 };
 
 const Dashboard = () => {
+  const planContext = useContext(PlantContext);
+
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
@@ -39,6 +42,7 @@ const Dashboard = () => {
       });
     }
   }, []);
+
   return (
     <Container display='flex' direction='column' fluid css={{ minHeight: '100vh', minWidth: '100%', p: 0, m: 0 }}>
       <UserNavbar />
@@ -53,18 +57,12 @@ const Dashboard = () => {
               <Button auto icon={<AddIcon color='#FFFFFF' width={16} height={16} />} color='success' />
             </Container>
             <Grid.Container gap={2} justify='flex-start'>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
+              {/* TODO : call to recent plant and not all plant */}
+              {planContext?.plants.map((plant) => (
+                <Grid xs={6} sm={3} key={plant.id}>
+                  <PlantPreviewCard name={plant.name} isEnable={plant.isEnable} />
+                </Grid>
+              ))}
             </Grid.Container>
           </div>
           <div className={styles.dashboard__main__information}>
