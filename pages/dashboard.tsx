@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Container, Row, Grid, Text, Button } from '@nextui-org/react';
 
@@ -12,6 +12,7 @@ import AddIcon from '../components/icons/AddIcon';
 
 import { NotificationIconEnum } from '../enums/NotificationIconEnum';
 import { PlantStatusEnum } from '../enums/PlantStatusEnum';
+import { UserPosition } from '../types/user.types';
 
 import styles from '../styles/pages/Dashboard.module.scss';
 
@@ -24,6 +25,8 @@ const requestNotificationPermission = async () => {
 };
 
 const Dashboard = () => {
+  const [position, setPosition] = useState<UserPosition>({ latitude: 48.86, longitude: 2.33 });
+
   useEffect(() => {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
@@ -36,9 +39,14 @@ const Dashboard = () => {
             console.log('Service Worker registration failed: ', err);
           }
         );
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+          setPosition({ latitude: position.coords.latitude, longitude: position.coords.longitude });
+        });
       });
     }
   }, []);
+
   return (
     <Container display='flex' direction='column' fluid css={{ minHeight: '100vh', minWidth: '100%', p: 0, m: 0 }}>
       <UserNavbar />
@@ -104,7 +112,7 @@ const Dashboard = () => {
               <Text b size='$2xl' color='#224722'>
                 Weather
               </Text>
-              <WeatherCard />
+              <WeatherCard position={position} />
             </div>
           </div>
         </main>
