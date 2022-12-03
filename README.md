@@ -1,23 +1,45 @@
-# Progressive Web App Example
+# My Plant Monitoring
 
-This example uses [`next-pwa`](https://github.com/shadowwalker/next-pwa) to create a progressive web app (PWA) powered by [Workbox](https://developers.google.com/web/tools/workbox/).
+This project was created for the Epitech PWA module<br>
+This project uses [**NextUi**](https://nextui.org/) as React UI library<br>
 
-## Deploy your own
+## How to run locally
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+To launch this project locally, you have to:<br>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/progressive-web-app&project-name=progressive-web-app&repository-name=progressive-web-app)
+- Copy and rename the `.env.example` to `.env`<br>
+  Repo back [**here**](https://gitlab.com/Cerfio/m-rea-901-back)
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example progressive-web-app progressive-web-app
-# or
-yarn create next-app --example progressive-web-app progressive-web-app
-# or
-pnpm create next-app --example progressive-web-app progressive-web-app
+```sh
+cp .env.example .env
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- Create an account on [**OpenWeather**](https://openweathermap.org/)
+- Create an api key : https://home.openweathermap.org/api_keys
+- Copy this api key in the `.env`
+
+```sh
+NEXT_PUBLIC_OPEN_WEATHER_KEY=<your-api-key>
+```
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `yarn run start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.
+
+### `yarn run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.
+
+## Deployment
+
+The deployment is done automatically on [**Netlify**](https://www.netlify.com/) when someone merge something on `main`.
