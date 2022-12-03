@@ -33,7 +33,19 @@ const NotificationModal = () => {
           </Text>
         </Modal.Header>
         <Modal.Body css={{ textAlign: 'center' }}>
-          To receive push notifications, please accept notifications in your browser
+          <Text>
+            Notification Status : &nbsp;
+            {authContext?.notification ? (
+              <Text b color='success'>
+                ON
+              </Text>
+            ) : (
+              <Text b color='error'>
+                OFF
+              </Text>
+            )}
+          </Text>
+          <Text>To receive push notifications, please accept notifications in your browser</Text>
         </Modal.Body>
         <Modal.Footer />
       </Modal>
