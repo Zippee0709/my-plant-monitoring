@@ -60,7 +60,7 @@ const Dashboard = () => {
               <Text b size='$2xl' color='#224722'>
                 Recent plants
               </Text>
-              <Button auto icon={<AddIcon color='#FFFFFF' width={16} height={16} />} color='success' />
+              {/* <Button auto icon={<AddIcon color='#FFFFFF' width={16} height={16} />} color='success' /> */}
             </Container>
             <Grid.Container gap={2} justify='flex-start'>
               {/* TODO : call to recent plant and not all plant */}

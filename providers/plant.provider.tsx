@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Cookies from 'universal-cookie';
 import PlantContext from '../contexts/plant.context';
 import { RequestFailedResponseType } from '../types/clientApi.types';
-import { PlantType } from '../types/plant.types';
+import { CreatePlantResponseType, PlantType } from '../types/plant.types';
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
@@ -36,6 +36,31 @@ function PlantProvider({ children }: Props) {
     }
   }
 
+  async function CreatePlant(): Promise<RequestFailedResponseType | CreatePlantResponseType> {
+    try {
+      const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/plant`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          macAddress: '00:00:00:00:00:00',
+          serialNumber: '123456789',
+        }),
+      });
+      const data: CreatePlantResponseType = await rep.json();
+      return data;
+    } catch (error) {
+      return {
+        statusCode: 400,
+        error: 'Bad Request',
+        message: 'PlantsError',
+      };
+    }
+  }
+
   useEffect(() => {
     GetPlants();
   }, []);
@@ -44,6 +69,7 @@ function PlantProvider({ children }: Props) {
     () => ({
       plants,
       GetPlants,
+      CreatePlant,
     }),
     [plants]
   );

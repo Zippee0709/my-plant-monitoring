@@ -25,3 +25,10 @@ interface Data {
   createdAt: Date;
   updatedAt: Date;
 }
+
+//
+// Create plant response type
+// ===== ===== ===== ===== =====
+export interface CreatePlantResponseType {
+  message: string;
+}

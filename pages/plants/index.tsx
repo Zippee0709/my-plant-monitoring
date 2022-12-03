@@ -5,6 +5,7 @@ import AddIcon from '../../components/icons/AddIcon';
 import UserNavbar from '../../components/navbars/UserNavbar';
 import Sidebar, { SidebarItems } from '../../components/sidebars/Sidebar';
 import PlantContext from '../../contexts/plant.context';
+import { RequestFailedResponseType } from '../../types/clientApi.types';
 
 const Plants = () => {
   const planContext = useContext(PlantContext);
@@ -12,6 +13,21 @@ const Plants = () => {
 
   const handleSearch = (e: React.ChangeEvent<FormElement>) => {
     setSearch(e.target.value);
+  };
+
+  const onCreatePlant = async () => {
+    if (!planContext) return;
+    const rep = await planContext.CreatePlant();
+    if ((rep as RequestFailedResponseType).error) {
+      // TODO : repair this -> need to add <ToastContainer /> in _app.tsx,
+      // TODO : but it's broken when the toast appear
+      // toast.error('Error - login', {
+      //   position: 'top-right',
+      //   autoClose: 2500,
+      // });
+      return;
+    }
+    await planContext.GetPlants();
   };
 
   return (
@@ -49,7 +65,12 @@ const Plants = () => {
                 onChange={handleSearch}
               />
               <Spacer x={0.5} />
-              <Button auto icon={<AddIcon color='#FFFFFF' width={16} height={16} />} color='success'>
+              <Button
+                auto
+                icon={<AddIcon color='#FFFFFF' width={16} height={16} />}
+                color='success'
+                onPress={onCreatePlant}
+              >
                 Add a plant
               </Button>
             </Container>
