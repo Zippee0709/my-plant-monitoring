@@ -10,12 +10,14 @@ import WeatherCard from '../components/cards/WeatherCard';
 
 import AddIcon from '../components/icons/AddIcon';
 
-import { NotificationIconEnum } from '../enums/NotificationIconEnum';
+import { NotificationIconEnum, NotificationTypeEnum } from '../enums/NotificationIconEnum';
 import { PlantStatusEnum } from '../enums/PlantStatusEnum';
 import { UserPosition } from '../types/user.types';
 
 import styles from '../styles/pages/Dashboard.module.scss';
 import PlantContext from '../contexts/plant.context';
+import { NotificationType } from '../types/notification.types';
+import { RequestFailedResponseType } from '../types/clientApi.types';
 
 const requestNotificationPermission = async () => {
   const permission = await window.Notification.requestPermission();
@@ -27,7 +29,18 @@ const requestNotificationPermission = async () => {
 
 const Dashboard = () => {
   const [position, setPosition] = useState<UserPosition>({ latitude: 48.86, longitude: 2.33 });
-  const planContext = useContext(PlantContext);
+  const plantContext = useContext(PlantContext);
+  const [notifications, setNotifications] = useState<NotificationType[]>([]);
+
+  const matchingNotificationTab = {
+    [NotificationTypeEnum.WATERING]: NotificationIconEnum.WATER,
+    [NotificationTypeEnum.NEW_PLANT]: NotificationIconEnum.NEW_PLANT,
+  };
+
+  const matchingNotificationStatusTab = {
+    [NotificationTypeEnum.WATERING]: PlantStatusEnum.NEED_WATER,
+    [NotificationTypeEnum.NEW_PLANT]: PlantStatusEnum.HEALTHY,
+  };
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -47,6 +60,18 @@ const Dashboard = () => {
         });
       });
     }
+
+    const getNotif = async () => {
+      const rep = await plantContext?.GetNotifications();
+      if ((rep as RequestFailedResponseType).error) {
+        console.log('error');
+        return;
+      }
+      setNotifications(rep as NotificationType[]);
+      return;
+    };
+
+    getNotif();
   }, []);
 
   return (
@@ -64,11 +89,12 @@ const Dashboard = () => {
             </Container>
             <Grid.Container gap={2} justify='flex-start'>
               {/* TODO : call to recent plant and not all plant */}
-              {planContext?.plants.map((plant) => (
-                <Grid xs={6} sm={3} key={plant.id}>
-                  <PlantPreviewCard name={plant.name} isEnable={plant.isEnable} />
-                </Grid>
-              ))}
+              {plantContext?.plants &&
+                plantContext?.plants.map((plant) => (
+                  <Grid xs={6} sm={3} key={plant.id}>
+                    <PlantPreviewCard name={plant.name} isEnable={plant.isEnable} />
+                  </Grid>
+                ))}
             </Grid.Container>
           </div>
           <div className={styles.dashboard__main__information}>
@@ -78,26 +104,14 @@ const Dashboard = () => {
                   Notifications
                 </Text>
                 <div className={styles.dashboard__main__information__task__container}>
-                  <NotificationCard
-                    name='Rose'
-                    iconName={NotificationIconEnum.WATER}
-                    status={PlantStatusEnum.NEED_WATER}
-                  />
-                  <NotificationCard
-                    name='Rose'
-                    iconName={NotificationIconEnum.LIGHT}
-                    status={PlantStatusEnum.NEED_LIGHT}
-                  />
-                  <NotificationCard
-                    name='Rose'
-                    iconName={NotificationIconEnum.TEMPERATURE}
-                    status={PlantStatusEnum.TOO_HOT}
-                  />
-                  <NotificationCard
-                    name='Rose'
-                    iconName={NotificationIconEnum.TEMPERATURE}
-                    status={PlantStatusEnum.TOO_COLD}
-                  />
+                  {notifications?.map((notification) => (
+                    <NotificationCard
+                      key={notification.id}
+                      name='Rose'
+                      iconName={matchingNotificationTab[notification.type] ?? NotificationIconEnum.LIGHT}
+                      status={matchingNotificationStatusTab[notification.type] ?? PlantStatusEnum.HEALTHY}
+                    />
+                  ))}
                 </div>
                 <Link href='#' className={styles.dashboard__main__information__link}>
                   See more
