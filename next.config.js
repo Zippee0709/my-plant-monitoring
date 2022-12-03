@@ -3,7 +3,7 @@
 const runtimeCaching = require('next-pwa/cache');
 const withPWA = require('next-pwa')({
   dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
+  disable: process.env.NEXT_PUBLIC_ENV === 'development',
   register: true,
   runtimeCaching,
 });
@@ -12,7 +12,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV !== 'development',
+    removeConsole: process.env.NEXT_PUBLIC_ENV !== 'development',
   },
 };
 
