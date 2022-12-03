@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import { NextUIProvider } from '@nextui-org/react';
 import '../styles/globals.scss';
 import AuthProvider from '../providers/auth.provider';
+import PlantProvider from '../providers/plant.provider';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -38,7 +39,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <NextUIProvider>
         <AuthProvider>
-          <Component {...pageProps} />
+          <PlantProvider>
+            <Component {...pageProps} />
+          </PlantProvider>
         </AuthProvider>
       </NextUIProvider>
     </>
