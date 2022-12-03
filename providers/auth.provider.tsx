@@ -21,7 +21,7 @@ function AuthProvider({ children }: Props) {
     infos: Pick<AuthInputType, 'email' | 'password'>
   ): Promise<RequestFailedResponseType | AuthLoginRepType> {
     try {
-      const rep = await fetch('http://localhost:4242/auth/signin', {
+      const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/auth/signin`, {
         method: 'POST',
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -32,6 +32,7 @@ function AuthProvider({ children }: Props) {
       const data: AuthLoginRepType = await rep.json();
       return data;
     } catch (error) {
+      //TODO: type error with RequestFailedResponseType
       return {
         statusCode: 400,
         error: 'Bad Request',
@@ -44,7 +45,7 @@ function AuthProvider({ children }: Props) {
     infos: Omit<AuthInputType, 'confirmPassword'>
   ): Promise<RequestFailedResponseType | AuthRegisterRepType> {
     try {
-      const rep = await fetch('http://localhost:4242/auth/signup', {
+      const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/auth/signup`, {
         method: 'POST',
         headers: {
           Accept: 'application/json, text/plain, */*',
@@ -55,6 +56,7 @@ function AuthProvider({ children }: Props) {
       const data: AuthRegisterRepType = await rep.json();
       return data;
     } catch (error) {
+      //TODO: type error with RequestFailedResponseType
       return {
         statusCode: 400,
         error: 'Bad Request',
@@ -70,12 +72,19 @@ function AuthProvider({ children }: Props) {
 
   async function GetCurrentUser(): Promise<RequestFailedResponseType | UserType> {
     try {
-      const rep = await fetch('http://localhost:4242/user', {
+      const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/user`, {
         method: 'GET',
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       });
       const data = rep.json();
       return data;
     } catch (error) {
+      console.log(`error: ${error}`);
+      //TODO: type error with RequestFailedResponseType
       return {
         statusCode: 400,
         error: 'Bad Request',

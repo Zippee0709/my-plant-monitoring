@@ -77,8 +77,8 @@ const WeatherCard = ({ position }: WeatherCardProps) => {
               <Image
                 src={`https://openweathermap.org/img/wn/${weatherContext.weather.weather[0].icon}@2x.png`}
                 alt={`${weatherContext.weather.weather[0].id}--icon`}
-                width={100}
-                height={100}
+                width={80}
+                height={80}
               />
             </Row>
           </Card.Body>

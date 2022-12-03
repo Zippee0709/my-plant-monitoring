@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Container, Row, Grid, Text, Button } from '@nextui-org/react';
 
@@ -15,6 +15,7 @@ import { PlantStatusEnum } from '../enums/PlantStatusEnum';
 import { UserPosition } from '../types/user.types';
 
 import styles from '../styles/pages/Dashboard.module.scss';
+import PlantContext from '../contexts/plant.context';
 
 const requestNotificationPermission = async () => {
   const permission = await window.Notification.requestPermission();
@@ -26,6 +27,7 @@ const requestNotificationPermission = async () => {
 
 const Dashboard = () => {
   const [position, setPosition] = useState<UserPosition>({ latitude: 48.86, longitude: 2.33 });
+  const planContext = useContext(PlantContext);
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
@@ -61,18 +63,12 @@ const Dashboard = () => {
               <Button auto icon={<AddIcon color='#FFFFFF' width={16} height={16} />} color='success' />
             </Container>
             <Grid.Container gap={2} justify='flex-start'>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
-              <Grid xs={6} sm={3}>
-                <PlantPreviewCard />
-              </Grid>
+              {/* TODO : call to recent plant and not all plant */}
+              {planContext?.plants.map((plant) => (
+                <Grid xs={6} sm={3} key={plant.id}>
+                  <PlantPreviewCard name={plant.name} isEnable={plant.isEnable} />
+                </Grid>
+              ))}
             </Grid.Container>
           </div>
           <div className={styles.dashboard__main__information}>

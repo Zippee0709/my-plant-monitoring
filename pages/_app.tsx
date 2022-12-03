@@ -4,6 +4,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import '../styles/globals.scss';
 import AuthProvider from '../providers/auth.provider';
 import WeatherProvider from '../providers/weather.provider';
+import PlantProvider from '../providers/plant.provider';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -40,7 +41,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <NextUIProvider>
         <AuthProvider>
           <WeatherProvider>
-            <Component {...pageProps} />
+            <PlantProvider>
+              <Component {...pageProps} />
+            </PlantProvider>
           </WeatherProvider>
         </AuthProvider>
       </NextUIProvider>

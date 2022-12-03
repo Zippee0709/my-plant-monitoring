@@ -3,15 +3,16 @@ import { Card, Row, Text } from '@nextui-org/react';
 
 interface IPlantPreviewCardProps {
   name: string;
-  image: string;
+  image?: string;
+  isEnable: boolean;
 }
 
-const PlantPreviewCard = () => {
+const PlantPreviewCard = ({ name, image, isEnable }: IPlantPreviewCardProps) => {
   return (
     <Card isPressable>
       <Card.Body css={{ p: 0 }}>
         <Card.Image
-          src={'https://nextui.org/images/fruit-1.jpeg'}
+          src={image ?? 'https://nextui.org/images/fruit-1.jpeg'}
           objectFit='cover'
           width='100%'
           height={140}
@@ -20,8 +21,10 @@ const PlantPreviewCard = () => {
       </Card.Body>
       <Card.Footer css={{ justifyItems: 'flex-start' }}>
         <Row wrap='wrap' justify='space-between' align='center'>
-          <Text b>{'Orange'}</Text>
-          <Text css={{ color: '$accents7', fontWeight: '$semibold', fontSize: '$sm' }}>{'status'}</Text>
+          <Text b>{name}</Text>
+          <Text css={{ color: '$accents7', fontWeight: '$semibold', fontSize: '$sm' }}>
+            {isEnable ? 'Activated' : 'Disabled'}
+          </Text>
         </Row>
       </Card.Footer>
     </Card>
