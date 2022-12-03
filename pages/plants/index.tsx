@@ -37,7 +37,7 @@ const Plants = () => {
       gap={0}
       display='flex'
       direction='column'
-      css={{ minHeight: '100vh', padding: 0 }}
+      css={{ minHeight: '100vh', minWidth: '100%', p: 0, m: 0 }}
     >
       <UserNavbar />
       <Row>
