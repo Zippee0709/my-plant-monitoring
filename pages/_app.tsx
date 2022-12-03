@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { NextUIProvider } from '@nextui-org/react';
@@ -9,8 +8,9 @@ import PlantProvider from '../providers/plant.provider';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Fragment>
+    <NextUIProvider>
       <Head>
+        <base href='/' />
         <meta charSet='utf-8' />
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
         <meta
@@ -39,15 +39,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel='apple-touch-icon' sizes='152x152' href='/icons/apple-icon-152x152.png' />
         <link rel='apple-touch-icon' sizes='180x180' href='/icons/apple-icon-180x180.png' />
       </Head>
-      <NextUIProvider>
-        <AuthProvider>
-          <WeatherProvider>
-            <PlantProvider>
-              <Component {...pageProps} />
-            </PlantProvider>
-          </WeatherProvider>
-        </AuthProvider>
-      </NextUIProvider>
-    </Fragment>
+      <AuthProvider>
+        <WeatherProvider>
+          <PlantProvider>
+            <Component {...pageProps} />
+          </PlantProvider>
+        </WeatherProvider>
+      </AuthProvider>
+    </NextUIProvider>
   );
 }
