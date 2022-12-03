@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Container, Row, Col, Navbar, Text, Avatar, Button } from '@nextui-org/react';
 
 import PlantIcon from '../icons/PlantIcon';
-import BellIcon from '../icons/BellIcon';
 import PowerIcon from '../icons/PowerIcon';
 import styles from './UserNavbar.module.scss';
 import AuthContext from '../../contexts/auth.context';
@@ -11,6 +10,7 @@ import { useShallowEffect } from '@mantine/hooks';
 import { RequestFailedResponseType } from '../../types/clientApi.types';
 import { UserType } from '../../types/user.types';
 import { useRouter } from 'next/router';
+import NotificationModal from '../modals/NotificationModal';
 
 const UserNavbar = () => {
   const authContext = useContext(AuthContext);
@@ -65,9 +65,7 @@ const UserNavbar = () => {
         </Link>
       </Navbar.Brand>
       <Navbar.Content>
-        <Link href='/auth/signin' className={styles.login}>
-          <BellIcon />
-        </Link>
+        <NotificationModal />
         <Container display='flex' direction='row' css={{ padding: 0 }}>
           <Row gap={1} css={{ width: '100%' }}>
             <Avatar text={name[0]} />

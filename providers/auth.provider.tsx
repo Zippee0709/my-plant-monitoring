@@ -16,6 +16,7 @@ function AuthProvider({ children }: Props) {
   const token = cookies.get('token');
 
   const [user, setUser] = useState<UserType | null>(null);
+  const [notification, setNotification] = useState<boolean>(false);
 
   async function Login(
     infos: Pick<AuthInputType, 'email' | 'password'>
@@ -71,6 +72,10 @@ function AuthProvider({ children }: Props) {
     setUser(null);
   }
 
+  const setNotificationHandler = (type: boolean) => {
+    setNotification(type);
+  };
+
   async function GetCurrentUser(): Promise<RequestFailedResponseType | UserType> {
     try {
       const rep = await fetch(`${process.env.NEXT_PUBLIC_URL_API}/user`, {
@@ -103,7 +108,9 @@ function AuthProvider({ children }: Props) {
   const value = useMemo(
     () => ({
       signed: Boolean(user),
+      notification: notification,
       user,
+      setNotificationHandler,
       Login,
       Register,
       Logout,
