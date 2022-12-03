@@ -15,7 +15,14 @@ const Plants = () => {
   };
 
   return (
-    <Container display='flex' direction='column' fluid css={{ minHeight: '100vh', padding: 0 }}>
+    <Container
+      fluid
+      responsive={false}
+      gap={0}
+      display='flex'
+      direction='column'
+      css={{ minHeight: '100vh', padding: 0 }}
+    >
       <UserNavbar />
       <Row>
         <Sidebar selected={SidebarItems.plants} />

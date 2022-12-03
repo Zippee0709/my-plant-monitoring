@@ -49,7 +49,7 @@ const UserNavbar = () => {
   return (
     <Navbar variant='static' maxWidth='fluid' css={{ justifyContent: 'space-between' }}>
       <Navbar.Brand>
-        <Link href='/' className={styles['brand-link']}>
+        <Link href='/dashboard' className={styles['brand-link']}>
           <PlantIcon color='#224722' width={40} height={40} />
           <Text b size='$2xl' color='#224722'>
             MyPlant
