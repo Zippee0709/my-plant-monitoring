@@ -67,6 +67,7 @@ function AuthProvider({ children }: Props) {
 
   function Logout() {
     // TODO: add logout logic
+    cookies.remove('token');
     setUser(null);
   }
 

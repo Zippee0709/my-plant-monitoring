@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import Link from 'next/link';
-import { Container, Row, Col, Navbar, Text, Avatar } from '@nextui-org/react';
+import { Container, Row, Col, Navbar, Text, Avatar, Button } from '@nextui-org/react';
 
 import PlantIcon from '../icons/PlantIcon';
 import BellIcon from '../icons/BellIcon';
-import styles from './Navbar.module.scss';
+import PowerIcon from '../icons/PowerIcon';
+import styles from './UserNavbar.module.scss';
 import AuthContext from '../../contexts/auth.context';
 import { useShallowEffect } from '@mantine/hooks';
 import { RequestFailedResponseType } from '../../types/clientApi.types';
@@ -46,6 +47,13 @@ const UserNavbar = () => {
     updateUserInfos();
   }, [authContext]);
 
+  const handleLogout = () => {
+    if (authContext) {
+      authContext.Logout();
+      router.push('/');
+    }
+  };
+
   return (
     <Navbar variant='static' maxWidth='fluid' css={{ justifyContent: 'space-between' }}>
       <Navbar.Brand>
@@ -61,7 +69,7 @@ const UserNavbar = () => {
           <BellIcon />
         </Link>
         <Container display='flex' direction='row' css={{ padding: 0 }}>
-          <Row gap={1}>
+          <Row gap={1} css={{ width: '100%' }}>
             <Avatar text={name[0]} />
             <Col css={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%' }}>
               <Text size={12} b css={{ lineHeight: '16px' }}>
@@ -71,6 +79,9 @@ const UserNavbar = () => {
                 {isAdmin ? 'Admin' : 'User'}
               </Text>
             </Col>
+            <Button auto color='error' onClick={() => handleLogout()}>
+              <PowerIcon color='white' />
+            </Button>
           </Row>
         </Container>
       </Navbar.Content>
