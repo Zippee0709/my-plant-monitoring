@@ -8,8 +8,6 @@ import PlantPreviewCard from '../components/cards/PlantPreviewCard';
 import NotificationCard from '../components/cards/NotificationCard';
 import WeatherCard from '../components/cards/WeatherCard';
 
-import AddIcon from '../components/icons/AddIcon';
-
 import { NotificationIconEnum, NotificationTypeEnum } from '../enums/NotificationIconEnum';
 import { PlantStatusEnum } from '../enums/PlantStatusEnum';
 import { UserPosition } from '../types/user.types';
@@ -72,7 +70,19 @@ const Dashboard = () => {
     };
 
     getNotif();
+
+    const getPlants = async () => {
+      if (!plantContext) return;
+      const rep = await plantContext.GetPlants();
+      if ((rep as RequestFailedResponseType).error) {
+        console.error('Error: when fetching plants');
+        return;
+      }
+    };
+    getPlants();
   }, []);
+
+  if (!plantContext) return <div>loading</div>;
 
   return (
     <Container display='flex' direction='column' fluid css={{ minHeight: '100vh', minWidth: '100%', p: 0, m: 0 }}>
@@ -89,7 +99,7 @@ const Dashboard = () => {
             </Container>
             <Grid.Container gap={2} justify='flex-start'>
               {/* TODO : call to recent plant and not all plant */}
-              {plantContext?.plants &&
+              {plantContext?.plants.length > 0 &&
                 plantContext?.plants.map((plant) => (
                   <Grid xs={6} sm={3} key={plant.id}>
                     <PlantPreviewCard name={plant.name} isEnable={plant.isEnable} />

@@ -84,10 +84,6 @@ function PlantProvider({ children }: Props) {
     }
   }
 
-  useEffect(() => {
-    GetPlants();
-  }, []);
-
   const value = useMemo(
     () => ({
       plants,
