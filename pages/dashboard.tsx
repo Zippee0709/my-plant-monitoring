@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { Container, Row, Grid, Text, Button } from '@nextui-org/react';
 
@@ -15,7 +15,30 @@ import { PlantStatusEnum } from '../enums/PlantStatusEnum';
 
 import styles from '../styles/pages/Dashboard.module.scss';
 
+const requestNotificationPermission = async () => {
+  const permission = await window.Notification.requestPermission();
+  console.log(permission);
+  if (permission !== 'granted') {
+    throw new Error('Permission not granted for Notification');
+  }
+};
+
 const Dashboard = () => {
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').then(
+          async function (registration) {
+            console.log('Service Worker registration successful with scope: ', registration);
+            await requestNotificationPermission();
+          },
+          function (err) {
+            console.log('Service Worker registration failed: ', err);
+          }
+        );
+      });
+    }
+  }, []);
   return (
     <Container display='flex' direction='column' fluid css={{ minHeight: '100vh', minWidth: '100%', p: 0, m: 0 }}>
       <UserNavbar />
