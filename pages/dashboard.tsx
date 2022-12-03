@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Container, Row, Grid, Text, Button } from '@nextui-org/react';
+import { Container, Row, Grid, Text } from '@nextui-org/react';
 
 import UserNavbar from '../components/navbars/UserNavbar';
 import Sidebar, { SidebarItems } from '../components/sidebars/Sidebar';
@@ -13,20 +13,14 @@ import { PlantStatusEnum } from '../enums/PlantStatusEnum';
 import { UserPosition } from '../types/user.types';
 
 import styles from '../styles/pages/Dashboard.module.scss';
+import AuthContext from '../contexts/auth.context';
 import PlantContext from '../contexts/plant.context';
 import { NotificationType } from '../types/notification.types';
 import { RequestFailedResponseType } from '../types/clientApi.types';
 
-const requestNotificationPermission = async () => {
-  const permission = await window.Notification.requestPermission();
-  console.log(permission);
-  if (permission !== 'granted') {
-    throw new Error('Permission not granted for Notification');
-  }
-};
-
 const Dashboard = () => {
   const [position, setPosition] = useState<UserPosition>({ latitude: 48.86, longitude: 2.33 });
+  const authContext = useContext(AuthContext);
   const plantContext = useContext(PlantContext);
   const [notifications, setNotifications] = useState<NotificationType[]>([]);
 
@@ -38,6 +32,17 @@ const Dashboard = () => {
   const matchingNotificationStatusTab = {
     [NotificationTypeEnum.WATERING]: PlantStatusEnum.NEED_WATER,
     [NotificationTypeEnum.NEW_PLANT]: PlantStatusEnum.HEALTHY,
+  };
+
+  const requestNotificationPermission = async () => {
+    const permission = await window.Notification.requestPermission();
+    console.log('permission : ', permission);
+    if (permission !== 'granted') {
+      throw new Error('Permission not granted for Notification');
+    }
+    if (authContext) {
+      authContext.setNotificationHandler(true);
+    }
   };
 
   useEffect(() => {

@@ -5,7 +5,9 @@ import { UserType } from '../types/user.types';
 
 interface AuthContextData {
   signed: boolean;
+  notification: boolean;
   user: UserType | null;
+  setNotificationHandler: (type: boolean) => void;
   Login(infos: Pick<AuthInputType, 'email' | 'password'>): Promise<RequestFailedResponseType | AuthLoginRepType>;
   Register(infos: Omit<AuthInputType, 'confirmPassword'>): Promise<RequestFailedResponseType | AuthRegisterRepType>;
   Logout(): void;

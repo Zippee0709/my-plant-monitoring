@@ -23,7 +23,6 @@ const WeatherCard = ({ position }: WeatherCardProps) => {
     const getWeather = async () => {
       if (!weatherContext) return;
       const rep = await weatherContext.getWeather(position);
-      console.log('weatherContext.weather', weatherContext.weather);
       if ((rep as RequestFailedResponseType).error) {
         // TODO : repair this -> need to add <ToastContainer /> in _app.tsx,
         // TODO : but it's broken when the toast appear
