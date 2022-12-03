@@ -8,8 +8,6 @@ import PlantPreviewCard from '../components/cards/PlantPreviewCard';
 import NotificationCard from '../components/cards/NotificationCard';
 import WeatherCard from '../components/cards/WeatherCard';
 
-import AddIcon from '../components/icons/AddIcon';
-
 import { NotificationIconEnum } from '../enums/NotificationIconEnum';
 import { PlantStatusEnum } from '../enums/PlantStatusEnum';
 import { UserPosition } from '../types/user.types';

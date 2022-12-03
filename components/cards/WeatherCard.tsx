@@ -8,7 +8,6 @@ import WeatherContext from '../../contexts/weather.context';
 import WindIcon from '../icons/WindIcon';
 import TemperatureIcon from '../icons/TemperatureIcon';
 import WaterIcon from '../icons/WaterIcon';
-import SunnyIcon from '../../assets/weather-icons/sunny.svg';
 
 import { UserPosition } from '../../types/user.types';
 import { RequestFailedResponseType } from '../../types/clientApi.types';
