@@ -12,7 +12,7 @@ const urlB64ToUint8Array = (base64String) => {
 };
 
 const saveSubscription = async (subscription) => {
-  const SERVER_URL = 'http://localhost:4240/web/push/subscription';
+  const SERVER_URL = 'https://5c0b-2a01-cb08-55a-2500-d56d-9380-ed5c-22ff.ngrok.io/web/push/subscription';
   const response = await fetch(SERVER_URL, {
     method: 'post',
     headers: {
