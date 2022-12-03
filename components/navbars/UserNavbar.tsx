@@ -16,6 +16,7 @@ const UserNavbar = () => {
   const router = useRouter();
 
   const [name, setName] = useState<string>('');
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
   useShallowEffect(() => {
     const updateUserInfos = async () => {
@@ -39,6 +40,7 @@ const UserNavbar = () => {
         const user = rep as UserType;
         authContext!.user = user;
         setName(`${user.firstname} ${user.lastname}`);
+        setIsAdmin(user.admin);
       }
     };
     updateUserInfos();
@@ -66,7 +68,7 @@ const UserNavbar = () => {
                 {name}
               </Text>
               <Text size={12} css={{ lineHeight: '16px' }}>
-                User
+                {isAdmin ? 'Admin' : 'User'}
               </Text>
             </Col>
           </Row>

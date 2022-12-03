@@ -6,6 +6,7 @@ export type UserType = {
   firstname: string;
   lastname: string;
   email: string;
+  admin: boolean;
 };
 
 export type UserPosition = {
