@@ -9,7 +9,7 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ['https://fluffy-crepe-79ebcb.netlify.app'],
   },

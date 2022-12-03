@@ -1,3 +1,4 @@
+import React, { Fragment } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { NextUIProvider } from '@nextui-org/react';
@@ -8,7 +9,7 @@ import PlantProvider from '../providers/plant.provider';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <Fragment>
       <Head>
         <meta charSet='utf-8' />
         <meta httpEquiv='X-UA-Compatible' content='IE=edge' />
@@ -47,6 +48,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </WeatherProvider>
         </AuthProvider>
       </NextUIProvider>
-    </>
+    </Fragment>
   );
 }
